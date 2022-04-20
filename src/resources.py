@@ -37,6 +37,14 @@ class Account:                                                 #Här skapar jag 
 
 def create_profile():
     print(f"You have chosen to create a new profile\n")
+    username = input("What is your name?: ")
+    identification = input("What is your identification?: ")
+
+    return_account = Account(username, identification, 0, 0)
+
+    print(f"\n{return_account} this account has now been created")
+    print()
+    return return_account
 
         
 
