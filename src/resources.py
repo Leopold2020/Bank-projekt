@@ -3,17 +3,17 @@
 
 
 class Account:                                                 #Här skapar jag en class för att vara en mall för alla profil
-    def __init__(self, name, information, money, debt): 
+    def __init__(self, name, identification, money, debt): 
         self.name = name
-        self.information = information
+        self.identification = identification
         self.money = money
         self.debt = debt
 
     def get_name(self):             #Används för att skriva ut namnet om det behövs
         return self.name
 
-    def get_information(self):      #Används för att skriva ut personliga informationen om det behövs
-        return self.information
+    def get_identification(self):      #Används för att skriva ut personliga identification om det behövs
+        return self.identification
 
     def get_money(self):            #Används för att skriva ut pängar man har om det behövs
         return self.money
@@ -34,17 +34,47 @@ class Account:                                                 #Här skapar jag 
 
         self.money += addition
 
+    def profile_data(self):
+        return self.name, self.identification, self.money, self.debt
+
 
 def create_profile():
     print(f"You have chosen to create a new profile\n")
     username = input("What is your name?: ")
-    identification = input("What is your identification?: ")
+    information = input("What is your identification?: ")
 
-    return_account = Account(username, identification, 0, 0)
+    return_account = Account(username, information, 0, 0)
 
     print(f"\n{return_account} this account has now been created")
     print()
     return return_account
 
-        
 
+
+def save_profile(profile : Account):
+    save_list = []
+    #for profiles in line:
+    name, identification, money, debt = profile.profile_data()
+    save_string = f"{name}/{identification}/{money}/{debt}\n"
+    save_list.append(save_string)
+
+    with open("saved_profiles.txt", "w", encoding="utf8") as f:
+        for line in save_list:
+            f.write(line)
+        print("profile has been saved")
+
+
+
+
+def load_profiles():
+    profiles = []
+    with open("saved_profiles.txt", "r", encoding="utf8") as f:
+        for line in f.readlines():
+            data = line.split("/")
+            char = Account( data[0],
+                            data[1],
+                            int(data[2]),
+                            int(data[3]))
+
+            profiles.append(char)
+    return profiles
