@@ -1,4 +1,4 @@
-from resources import Account, create_profile, load_profiles, save_profile
+from resources import Account, create_profile, load_profiles, save_profile, login
 
 
 def menu():
@@ -23,25 +23,24 @@ def option_debt():                                  #Funktionen
 
 
 if __name__ == "__main__":
+    users = load_profiles()
+
+    # print("[1] create a new profile")
     
-    print("[1] create a new profile")
-    print("[2] Load a profile")
-    
-    first_choice = input(">> ")
+    # first_choice = input(">> ")
 
-    if first_choice == "1":     
-        user = create_profile()      #Här kommer koden som kallar på funktionen där man skapar en profil
+    # if first_choice == "1":     
+    #     user = create_profile()      #Här kommer koden som kallar på funktionen där man skapar en profil
 
-    if first_choice == "2":
-        user = load_profiles()         #Här kan man ladda en redan gjord profil
+    # if first_choice == "2":
+    #     user = load_profiles()         #Här kan man ladda en redan gjord profil
 
+    logged_in, user = login(users)
     print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
+    print(f"Hello {user.get_name()}, Welcome to this bank")
     choice1 = input(">> ")
 
-    while choice1 != "5":
-        print(f"Hello {user.get_name()}, Welcome to this bank")
-
-    
+    while choice1 != "5" and logged_in:
 
         if choice1 == "1":
             option_information()
@@ -60,7 +59,5 @@ if __name__ == "__main__":
 
         print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
         choice1 = input(">> ")
-
-    
     else:
         print("You have exited the program")
