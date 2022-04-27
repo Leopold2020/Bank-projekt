@@ -1,5 +1,5 @@
 from resources import Account, create_profile, load_profiles, save_profile, login
-
+from time import sleep
 
 def menu():
     print(f"Welcome to the bank-projekt, here you can look up your account \nyour persinal identification saved here, your total saved money and your debt owed to us.")
@@ -35,12 +35,25 @@ if __name__ == "__main__":
     # if first_choice == "2":
     #     user = load_profiles()         #Här kan man ladda en redan gjord profil
 
+   
+
     logged_in, user = login(users)
-    print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
-    print(f"Hello {user.get_name()}, Welcome to this bank")
-    choice1 = input(">> ")
+    
+    if logged_in is True:
+
+        print(f"Hello {user.get_name()}, Welcome to O.N.B")
+        sleep(2)
+        print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
+        choice1 = input(">> ")
+        sleep(1)
+    
+    else:
+        choice1 = "5"
+
+
 
     while choice1 != "5" and logged_in:
+       
 
         if choice1 == "1":
             option_information()
@@ -59,5 +72,7 @@ if __name__ == "__main__":
 
         print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
         choice1 = input(">> ")
+        sleep(1)
+
     else:
         print("You have exited the program")

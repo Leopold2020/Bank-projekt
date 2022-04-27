@@ -1,10 +1,11 @@
-
+from time import sleep
 
 
 
 class Account:                                                 #Här skapar jag en class för att vara en mall för alla profil
-    def __init__(self, name, identification, money, debt, version): 
+    def __init__(self, name, password, identification, money, debt, version): 
         self.name = name
+        self.password = password
         self.identification = identification
         self.money = money
         self.debt = debt
@@ -13,6 +14,9 @@ class Account:                                                 #Här skapar jag 
 
     def get_name(self):             #Används för att skriva ut namnet om det behövs
         return self.name
+
+    def get_password(self):
+        return self.password
 
     def get_identification(self):      #Används för att skriva ut personliga identification om det behövs
         return self.identification
@@ -46,12 +50,30 @@ class Account:                                                 #Här skapar jag 
         possible_ad = self.version
 
         if possible_ad == "1":
-            print("We just noticed that you have a standar account, and we would be so happy if you took the time to consider getting a uppgrade")
+            print("We just noticed that you have a standard account, and we would be so happy if you took the time to consider getting a uppgrade")
+            sleep(4)
+            while True:
+                print("Would you like to uppgrade to premium account? y/n")
+                account_option = input(">> ")
+                if account_option == "y":
+                    self.version = "2"
+                    break
+
+                if account_option == "n":
+                    print("what would it take to make you reconsider your choice?")
+                    input(">> ")
+                    sleep(3)
+                    print("Thank you for informing us how to better our services")
+                    break
+                
+                else:
+                    print("Please choose a valid option")
 
 
 def create_profile():
     print(f"You have chosen to create a new profile\n")
     username = input("What is your name?: ")
+    secretholder = input("Write password: ")
     information = input("What is your identification?: ")
     
     
@@ -73,7 +95,7 @@ def create_profile():
             print("Choose a valid option!")
 
 
-    return_account = Account(username, information, 0, 0 + fee, this_version )
+    return_account = Account(username, secretholder ,information, 0, 0 + fee, this_version )
 
     print(f"\n{return_account} this account has now been created")
     print()
@@ -84,8 +106,8 @@ def create_profile():
 def save_profile(profile : Account):
     save_list = []
     #for profiles in line:
-    name, identification, money, debt = profile.profile_data()
-    save_string = f"{name}/{identification}/{money}/{debt}\n"
+    name, password,  identification, money, debt, account = profile.profile_data()
+    save_string = f"{name}/{password}/{identification}/{money}/{debt}/{account}\n"
     save_list.append(save_string)
 
     with open("saved_profiles.txt", "w", encoding="utf8") as f:
@@ -95,18 +117,17 @@ def save_profile(profile : Account):
 
 
 
-
-
 def load_profiles():
     profiles = []
     with open("saved_profiles.txt", "r", encoding="utf8") as f:
         for line in f.readlines():
             data = line.split("/")
-            acont = Account( data[0],
+            acont = Account(data[0],
                             data[1],
-                            int(data[2]),
+                            data[2],
                             int(data[3]),
-                            data[4])
+                            int(data[4]),
+                            data[5])
 
             profiles.append(acont)
     return profiles
@@ -121,10 +142,10 @@ def login(users):
         user_name = input("\nUsername >> ")
         password = input("Password >> ")
         for user in users:
-            if(user_name == user.name and password == user.identification):
+            if(user_name == user.name and password == user.password):
                 return True, user
         else:
-            print("Username or password does not match.")
             tries -= 1
+            print(f"Username or password does not match, You have {tries} attepmts left.")
     else:
         return False, None
