@@ -43,10 +43,15 @@ class Account:                                                 #Här skapar jag 
 
         self.money += addition
 
+    
+    def pay_debt(self):
+        print("You have selected to pay your debts.\n")
+        #unfinised
+
     def profile_data(self):
         return self.name, self.identification, self.money, self.debt
     
-    def ad(self):
+    def advertisement(self):
         possible_ad = self.version
 
         if possible_ad == "1":
@@ -57,6 +62,7 @@ class Account:                                                 #Här skapar jag 
                 account_option = input(">> ")
                 if account_option == "y":
                     self.version = "2"
+                    self.debt += 200
                     break
 
                 if account_option == "n":
@@ -68,6 +74,33 @@ class Account:                                                 #Här skapar jag 
                 
                 else:
                     print("Please choose a valid option")
+
+    
+    def admin_privliges(self):
+        print(f"You have selected to log in as a admin, you have to posses a password administered by the owner of this bank. If you do not posses a allowence it is illigal to hack youre way through")
+        
+        decision = []
+        while decision != "solved":
+
+            print("\n[1] log in as admin\n[2] Exit admin meny")
+            adminmeny = input(">> ")
+
+            if adminmeny == "1":
+                print("You have selected to login as an administrator, write the password you have been handed")
+                admin_login = input(">> ")
+
+                if admin_login == "fuckoff":
+                    self.version = 3
+
+                    
+
+            if adminmeny == "2":
+                print("you have exited the admin meny.")
+                decision == "solved"
+
+            else:
+                print("\nThat is not a valid option, please read options carfully\n")
+                sleep(3)
 
 
 def create_profile():
@@ -100,6 +133,9 @@ def create_profile():
     print(f"\n{return_account} this account has now been created")
     print()
     return return_account
+
+
+
 
 
 

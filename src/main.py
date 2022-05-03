@@ -60,6 +60,8 @@ if __name__ == "__main__":
     
         elif choice1 == "2":
             option_loan()
+
+            user.advertisment()
         
         elif choice1 == "3":
             option_debt()
@@ -69,6 +71,8 @@ if __name__ == "__main__":
 
         else:
             print("Invalid option")
+
+        user.advertisement()
 
         print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
         choice1 = input(">> ")
