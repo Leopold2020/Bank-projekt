@@ -43,7 +43,7 @@ if __name__ == "__main__":
 
         print(f"Hello {user.get_name()}, Welcome to O.N.B")
         sleep(2)
-        print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
+        print(f"What would you like to do here? \n[1] read out name and identification. \n[2] Take a loan \n[3] Look at your debt and cry.\n[4] Save profile \n[5] Exit the bank. \n[6] pay your debts \n[7] Admin options")
         choice1 = input(">> ")
         sleep(1)
     
@@ -69,12 +69,30 @@ if __name__ == "__main__":
         elif choice1 == "4":
             save_profile(user)
 
+        elif choice1 == "6":
+            user.pay_debts()
+
+        elif choice1 == "7":
+            print("You have slected the admin meny")
+
+            version = user.get_version()
+
+            print(version)
+            
+            if user.get_version() == "Admin":
+                print("hello")
+                user.change_intrest()
+
+            else:
+                print("You are not an Admin")
+                sleep(2)
+
         else:
             print("Invalid option")
 
         user.advertisement()
 
-        print(f"What would you like to do here? \n1: read out name and identification. \n2. Take a loan \n3. Look at your debt and cry.\n4. Save profile \n5. Exit the bank. \n")
+        print(f"What would you like to do here? \n[1] read out name and identification. \n[2] Take a loan \n[3] Look at your debt and cry.\n[4] Save profile \n[5] Exit the bank. \n[6] pay your debts \n[7] Admin options")
         choice1 = input(">> ")
         sleep(1)
 
