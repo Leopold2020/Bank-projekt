@@ -224,7 +224,7 @@ def load_profiles():
                             data[2],
                             int(data[3]),
                             int(data[4]),
-                            data[5])
+                            data[5].rstrip("\n"))
 
             profiles.append(acont)
     return profiles
