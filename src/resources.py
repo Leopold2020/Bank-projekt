@@ -26,32 +26,59 @@ class Account:                                                 #Här skapar jag 
 
     def get_name(self):             #Används för att skriva ut namnet om det behövs
         return self.name
+        """En funktion för att få namnet
+        """
 
     def get_password(self):
         return self.password
+        """En funktion för att få lössenordet
+        """
 
     def get_identification(self):      #Används för att skriva ut personliga identification om det behövs
         return self.identification
+        """En funktion för att få identifieraren
+        """
 
     def get_money(self):            #Används för att skriva ut pängar man har om det behövs
         return self.money
+        """En funktion för att få veta hur mucket penagar man har
+        """
 
     def get_debt(self):             #Används för att skriva ut skulden man har om det behövs
         return self.debt
+        """En funktion för att få veta hur mycket skuld man har
+        """
 
     def get_version(self):
         return self.version
+        """En funktion för att se vad för veriation man har på sin profil
+        """
     
     def take_a_loan(self):                                          #En funktion där man ska kunna ta ett lån, den lägger själv också slkuld i self.debt variabeln
+        """En funktion för att ta ett lån, den lägger också till skuld atomatiskt
+        """
+
         print(f"In this menu you can take a loan.\n")
-        loan = int(input(f"How much money would you want to take a loan on.\n"))
+        loan = int(input(f"How much money would you want to take a loan on.\n>>"))
         
         self.money += loan
-        self.debt += loan * 1.10
+
+
+        with open("intrest_rate.txt", "r",encoding="utf8") as f:
+        
+            intrest = int(f.read())
+
+            end_result = intrest / 100
+
+            end_result += 1
+
+
+        self.debt += loan * end_result
+
 
     def put_in_money(self):
         print(f"You have selected to put in money in this account\n")
-        addition = int(input("how much would you like to add to your bank account?: "))      
+        addition = int(input("how much would you like to add to your bank account? \n>> "))      
 
         self.money += addition
 
@@ -98,7 +125,7 @@ class Account:                                                 #Här skapar jag 
             print("You do not have any debt to pay here.")
 
     def profile_data(self):
-        return self.name, self.identification, self.money, self.debt
+        return self.name, self.identification, self.money, self.debt, self.version
     
     def advertisement(self):
         possible_ad = self.version
@@ -112,6 +139,25 @@ class Account:                                                 #Här skapar jag 
                 if account_option == "y":
                     self.version = "Premium"
                     self.debt += 200
+                    
+
+
+                    save_list = []
+                    #for profiles in line:
+                    name, password,  identification, money, debt, account = profile.profile_data()
+                    save_string = f"{name}/{password}/{identification}/{money}/{debt}/{account}\n"
+                    save_list.append(save_string)
+
+                    with open("saved_profiles.txt", "a", encoding="utf8") as f:
+                        for line in save_list:
+                            f.write(line)
+                        # print("profile has been saved")
+
+
+
+
+
+
                     break
 
                 if account_option == "n":
@@ -153,8 +199,8 @@ class Account:                                                 #Här skapar jag 
 
     def change_intrest(self):
 
-        print("What is the new intrest rate?")
-        intrest_change = input(">> ")
+        print("What is the new intrest rate? You write in precent, but do not write the procent sign.")
+        intrest_change = input(">> ") 
         with open("intrest_rate.txt", "w", encoding="utf8") as f:
             
                 f.write(intrest_change)
@@ -197,6 +243,17 @@ def create_profile():
 
 
 
+def get_intrest():
+    with open("intrest_rate.txt", "r",encoding="utf8") as f:
+        
+        intrest = f.read()
+
+        end_result = intrest / 100
+
+        end_result += 1
+
+        return end_result
+
 
 
 
@@ -210,7 +267,7 @@ def save_profile(profile : Account):
     with open("saved_profiles.txt", "a", encoding="utf8") as f:
         for line in save_list:
             f.write(line)
-        print("profile has been saved")
+        # print("profile has been saved")
 
 
 
@@ -231,13 +288,24 @@ def load_profiles():
 
 
 def login(users):
+    """En funktion som man använder för att kunna logga in i en redan gjord profil, man behöver skriva in rätt namn och lössenord för att man ska
+    kunna logga in. Man har bara tre försök innan man blir uteslängd.
+    Den fungerar genom att alla profiler blir nedladdade sen går man genom dom en itaget för att se vilken som matchar den man skrrev ner.
+
+    Args:
+        users (list): en variabel för att ha alla gjorda profiler.
+
+    Returns:
+        list: Antigen så 
+    """
+
     tries = 3
     print("Please log in with your credentials")
     print(f"You have {tries} remaining before you are locked out of the system.")
 
     while tries > 0:
-        user_name = input("\nUsername >> ")
-        password = input("Password >> ")
+        user_name = input("\nUsername \n>> ")
+        password = input("Password \n>> ")
         for user in users:
             if(user_name == user.name and password == user.password):
                 return True, user

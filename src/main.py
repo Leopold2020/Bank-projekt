@@ -1,6 +1,7 @@
 from resources import Account, create_profile, load_profiles, save_profile, login
 from time import sleep
 
+
 def menu():
     print(f"Welcome to the bank-projekt, here you can look up your account \nyour persinal identification saved here, your total saved money and your debt owed to us.")
 
@@ -20,9 +21,22 @@ def option_debt():                                  #Funktionen
     
     input("Press enter to continue")
 
+def profile_selection():
+    login_option = input("Do you want to load a already made profile[1] or would you like to create a new one [2]? \n>> ")
+
+    if login_option == "1":
+        pass
+
+    if login_option == "2":
+        create_profile
+
+
 
 
 if __name__ == "__main__":
+
+    profile_selection()
+
     users = load_profiles()
 
     # print("[1] create a new profile")
@@ -61,7 +75,9 @@ if __name__ == "__main__":
         elif choice1 == "2":
             option_loan()
 
-            user.advertisment()
+            user.advertisement()
+
+            save_profile(user)
         
         elif choice1 == "3":
             option_debt()
@@ -71,6 +87,7 @@ if __name__ == "__main__":
 
         elif choice1 == "6":
             user.pay_debts()
+            save_profile(user)
 
         elif choice1 == "7":
             print("You have slected the admin meny")
