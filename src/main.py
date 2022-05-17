@@ -6,54 +6,49 @@ def menu():
     print(f"Welcome to the bank-projekt, here you can look up your account \nyour persinal identification saved here, your total saved money and your debt owed to us.")
 
 
-def option_information():                                                                                                       #Den läser upp ens namn och id som är nedskriven i ens profil.
-    print(f"your account name is {user.get_name()} and your registered identification is {user.get_identification()}\n") 
+def option_information():
+    """Menyval för att få information om ens profil utskriven
+    """
+    print(f"your account name is {user.get_name()} and your registered identification is {user.get_identification()}, you have a {user.get_version()} account\n") 
     
     input("Press enter to continue")
 
-def option_loan():          #En kallelse på funktionen där man kan ta ett lån och få skuld beroende på hur mycket man lånade.
+def option_loan():
+    """En kallelse på funktionen där man kan ta ett lån och få skuld beroende på hur mycket man lånade.
+    """
     user.take_a_loan()
 
     input("Press enter to continue")
 
-def option_debt():                                  #Funktionen
+def option_debt():
+    """Ett menyval som kallar på funktionen där man får veta hur mycket skulder man har.
+    """
     print(f"You have {user.get_debt()} $ in debt")
     
     input("Press enter to continue")
 
-def profile_selection():
-    login_option = input("Do you want to load a already made profile[1] or would you like to create a new one [2]? \n>> ")
 
-    if login_option == "1":
-        pass
-
-    if login_option == "2":
-        create_profile
 
 
 
 
 if __name__ == "__main__":
 
-    profile_selection()
 
-    users = load_profiles()
+    login_option = input("Do you want to load a already made profile[1] or would you like to create a new one [2]? \n>> ")
 
-    # print("[1] create a new profile")
-    
-    # first_choice = input(">> ")
+    if login_option == "1":
+        users = load_profiles()     #Programmet låter en logga in
 
-    # if first_choice == "1":     
-    #     user = create_profile()      #Här kommer koden som kallar på funktionen där man skapar en profil
 
-    # if first_choice == "2":
-    #     user = load_profiles()         #Här kan man ladda en redan gjord profil
+    if login_option == "2":
+        user = create_profile       #Man skapar en ny profil
 
    
 
     logged_in, user = login(users)
     
-    if logged_in is True:
+    if logged_in is True:       #Programmet kollar att man faktiskt lyckats med inloggandet eller att man har skapat profil
 
         print(f"Hello {user.get_name()}, Welcome to O.N.B")
         sleep(2)
@@ -77,7 +72,6 @@ if __name__ == "__main__":
 
             user.advertisement()
 
-            save_profile(user)
         
         elif choice1 == "3":
             option_debt()
@@ -87,7 +81,6 @@ if __name__ == "__main__":
 
         elif choice1 == "6":
             user.pay_debts()
-            save_profile(user)
 
         elif choice1 == "7":
             print("You have slected the admin meny")
