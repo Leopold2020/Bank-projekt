@@ -15,13 +15,16 @@ This projekt was built solely on python and does therefore not have more than te
 
 - Python 3.10+
 
+## Example
+
+![image](https://user-images.githubusercontent.com/95760934/169811105-3e527dd5-5ef9-40e3-862d-e4009a9e6bec.png)
+
+
 ## Licens (License)
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ## Contact (Kontakt)
-
-***Skriv här hur du blir kontaktad ifall det finns frågor om projektet***
 
 Oskar -  - email@example.com
 
