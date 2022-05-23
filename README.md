@@ -19,6 +19,10 @@ This projekt was built solely on python and does therefore not have more than te
 
 ![image](https://user-images.githubusercontent.com/95760934/169811105-3e527dd5-5ef9-40e3-862d-e4009a9e6bec.png)
 
+![image](https://user-images.githubusercontent.com/95760934/169815384-c45218c9-e2da-4c18-874b-53499ce233ad.png)
+
+![image](https://user-images.githubusercontent.com/95760934/169815502-d5fa364f-4150-4643-9fff-6da610b8e96c.png)
+
 
 ## Licens (License)
 
@@ -29,7 +33,6 @@ This projekt was built solely on python and does therefore not have more than te
 Oskar -  - email@example.com
 
 Projektlänk: https://github.com/Leopold2020/Bank-projekt 
-![image](https://user-images.githubusercontent.com/95760934/169815308-f2f5a347-afef-4135-bb3d-7431d605a6db.png)
 
 
 ## Erkännanden (Acknowledgments)
