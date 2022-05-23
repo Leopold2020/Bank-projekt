@@ -36,17 +36,21 @@ if __name__ == "__main__":
 
 
     login_option = input("Do you want to load a already made profile[1] or would you like to create a new one [2]? \n>> ")
+    users =""
+    logged_in =""
+
 
     if login_option == "1":
         users = load_profiles()     #Programmet låter en logga in
+        logged_in, user = login(users)
 
 
-    if login_option == "2":
-        user = create_profile       #Man skapar en ny profil
+    elif login_option == "2":
+        logged_in, user = create_profile()       #Man skapar en ny profil
 
    
 
-    logged_in, user = login(users)
+    
     
     if logged_in is True:       #Programmet kollar att man faktiskt lyckats med inloggandet eller att man har skapat profil
 
@@ -69,9 +73,8 @@ if __name__ == "__main__":
     
         elif choice1 == "2":
             option_loan()
-
-            user.advertisement()
-
+            
+            user.advertisement
         
         elif choice1 == "3":
             option_debt()
@@ -84,13 +87,8 @@ if __name__ == "__main__":
 
         elif choice1 == "7":
             print("You have slected the admin meny")
-
-            version = user.get_version()
-
-            print(version)
             
             if user.get_version() == "Admin":
-                print("hello")
                 user.change_intrest()
 
             else:
@@ -100,8 +98,9 @@ if __name__ == "__main__":
         else:
             print("Invalid option")
 
-        user.advertisement()
+        print()
 
+        print()
         print(f"What would you like to do here? \n[1] read out name and identification. \n[2] Take a loan \n[3] Look at your debt and cry.\n[4] Save profile \n[5] Exit the bank. \n[6] pay your debts \n[7] Admin options")
         choice1 = input(">> ")
         sleep(1)

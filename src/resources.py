@@ -163,7 +163,7 @@ class Account:                                                 #Här skapar jag 
                     print("what would it take to make you reconsider your choice?")     #Programmet frågar en hur man kan förbättra sig, men klagomålet tas inte till hänsyn elelr sparas inte på något sätt.
                     input(">> ")
                     sleep(3)
-                    print("Thank you for informing us how to better our services")
+                    print("Thank you for informing us how to better our services\n")
                     break
                 
                 else:
@@ -211,7 +211,8 @@ class Account:                                                 #Här skapar jag 
                 print("Intrest has been changed has been saved")
 
 
-
+        def __str__(self):
+            return f"{self.name}"
 
 
 def create_profile():
@@ -247,7 +248,7 @@ def create_profile():
 
     return_account = Account(username, secretholder ,information, 0, 0 + fee, this_version )        #En lista för all information för alla delar som gör upp en profil i detta program
 
-    print(f"\n{return_account} this account has now been created")
+    print(f"\n{return_account.name} this account has now been created")
     print()
     return True, return_account
 
@@ -282,13 +283,13 @@ def save_profile(profile : Account):
     save_list = []
     #for profiles in line:
     name, password,  identification, money, debt, account = profile.profile_data()
-    save_string = f"\n{name}/{password}/{identification}/{money}/{debt}/{account}\n"      #Här så tar man alla delar som gör upp en profil sen lägger man emällan alla delar ett / för att datorn ska kunna skilja alla delar åt när man loggar in som en profil
+    save_string = f"\n{name}/{password}/{identification}/{money}/{debt}/{account}"      #Här så tar man alla delar som gör upp en profil sen lägger man emällan alla delar ett / för att datorn ska kunna skilja alla delar åt när man loggar in som en profil
     save_list.append(save_string)
 
     with open("saved_profiles.txt", "a", encoding="utf8") as f:
         for line in save_list:
             f.write(line)
-        # print("profile has been saved")
+    print("profile has been saved")
 
 
 
